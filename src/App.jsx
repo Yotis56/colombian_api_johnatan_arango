@@ -1,12 +1,11 @@
+import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom'
+import { Home } from './pages/Home'
 import './App.css'
 
-function App() {
-
-  return (
-    <>
-      <h1>Page under construction</h1>
-    </>
+const App = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path='/' Component={Home} />
   )
-}
+)
 
 export default App
