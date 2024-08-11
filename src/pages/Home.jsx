@@ -7,6 +7,7 @@ const Home = ( ) => {
     const [aeropuertos, setAeropuertos] = useState([])
     const [atracciones, setAtracciones] = useState([])
     const [departamentos, setDepartamentos] = useState([])
+    const [regiones, setRegiones] = useState([])
 
     useEffect( () => {
         const getData = async (endpoint) => {
@@ -26,6 +27,9 @@ const Home = ( ) => {
                     case 'Department':
                         setDepartamentos(data)
                         break
+                    case 'Region':
+                        setRegiones(data)
+                        break
                 }
             } catch (e) {
                 console.error(e)
@@ -35,12 +39,16 @@ const Home = ( ) => {
         getData('TouristicAttraction')
         getData('Airport')
         getData('Department')
+        getData('Region')
         
     }, [])
     
     let partidosGrouped = []
     let atraccionesGrouped = []
     let aeropuertosGrouped = []
+    let aeropuertosGroupedByRegion = {
+        "Region": {}
+    }
 
     const groupPresidents = () => {
         presidentes.forEach( presidente => {
@@ -128,10 +136,52 @@ const Home = ( ) => {
         })
     }
 
-    groupPresidents()
-    groupAtractions()
-    groupAirports()
-    console.log(aeropuertosGrouped)
+    const groupAirportsPerRegion = () => {
+        aeropuertos.forEach( aeropuerto => {
+            const airportRegion = regiones.find( item => item.id === aeropuerto.department.regionId)
+            if (!aeropuertosGroupedByRegion.Region[airportRegion.name]) {
+                aeropuertosGroupedByRegion.Region = {
+                    ...aeropuertosGroupedByRegion.Region,
+                    [airportRegion.name]: {
+                        "departamento": {}
+                    }
+                }
+                console.log(aeropuertosGroupedByRegion)
+            }
+            if (!aeropuertosGroupedByRegion.Region[airportRegion.name].departamento[aeropuerto.department.name]){
+                aeropuertosGroupedByRegion.Region[airportRegion.name].departamento = {
+                    ...aeropuertosGroupedByRegion.Region[airportRegion.name].departamento,
+                    [aeropuerto.department.name]: {
+                        "ciudad": {}
+                    }
+                }
+            }
+            if (!aeropuertosGroupedByRegion.Region[airportRegion.name].departamento[aeropuerto.department.name].ciudad[aeropuerto.city.name]){
+                aeropuertosGroupedByRegion.Region[airportRegion.name].departamento[aeropuerto.department.name].ciudad = {
+                    ... aeropuertosGroupedByRegion.Region[airportRegion.name].departamento[aeropuerto.department.name].ciudad,
+                    [aeropuerto.city.name]: {
+                        "tipo": {}
+                    }
+                }
+            }
+            if (!aeropuertosGroupedByRegion.Region[airportRegion.name].departamento[aeropuerto.department.name].ciudad[aeropuerto.city.name].tipo[aeropuerto.type]) {
+                aeropuertosGroupedByRegion.Region[airportRegion.name].departamento[aeropuerto.department.name].ciudad[aeropuerto.city.name].tipo = {
+                    ...aeropuertosGroupedByRegion.Region[airportRegion.name].departamento[aeropuerto.department.name].ciudad[aeropuerto.city.name].tipo,
+                    [aeropuerto.type]: 1
+                }
+            } else {
+                aeropuertosGroupedByRegion.Region[airportRegion.name].departamento[aeropuerto.department.name].ciudad[aeropuerto.city.name].tipo[aeropuerto.type] += 1
+            }
+            
+        })
+    }
+
+    // groupPresidents()
+    // groupAtractions()
+    // groupAirports()
+    groupAirportsPerRegion()
+    console.log(aeropuertosGroupedByRegion)
+    
     return (
         <>
             <p>Home page under construction</p>
