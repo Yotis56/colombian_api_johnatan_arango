@@ -1,0 +1,46 @@
+.viewer-container {
+    width: 90%;
+    margin: 0 auto;
+}
+.item-container {
+    width: 100%;
+    display: flex;
+    gap: 25px;
+    padding: 8px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.image-container img{
+    max-height: 160px;
+}
+.info-container p {
+    margin: 4px 0;
+    font-size: 13px;
+}
+.info-container p span {
+    font-weight: 600;
+}
+.partido-container {
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.partido-info {
+    display: flex;
+    justify-content: space-around;
+}
+.partido-info p span {
+    font-weight: 600;
+}
+.partido-container ul {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-height: 185px;
+}
+.partido-container ul li p {
+    margin: 4px;
+}

@@ -1,8 +1,6 @@
 import { Collapsible } from "./Colapsible"
 
-const EntityView = ({data, groupedData, time}) => {
-    // acá falta enviar como props la entidad agrupada
-   
+const AirportView = ({data, groupedData, time}) => {
     return (
         <div className="viewer-container">
             <div className="viewer_count">
@@ -21,8 +19,4 @@ const EntityView = ({data, groupedData, time}) => {
     )
 }
 
-export { EntityView }
-
-//Primero, debería hacer tres componentes, uno por cada entidad (ya que cada una tiene cosas distintas que mostrar)
-// lo otro es que para no complicarme, es mejor poner una orderedList con cada info de cada item. la info original y la ordenada
-// Para los aeropuertos tengo dos arrays (la info original y agrupada), y la tabla esa cacorra por región. Lo mejor es primero preguntar, porque si se puede no más mostrar la estructura del objeto
+export { AirportView }

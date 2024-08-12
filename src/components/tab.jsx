@@ -1,19 +1,19 @@
-
+import '../styles/tab.css'
 
 const Tab = ({selectedTab, setSelectedTab}) => {
     
     const handleClick = (event) => {
-        const target = event.target.attributes['name'].value
-        console.log(target)
+        const name = event.target.attributes['name'].value
+        setSelectedTab(name)
     }
 
     return (
         <>
             <nav>
-                <ul>
-                    <li name='presidentes' id='presidentes' onClick={handleClick}>Presidentes</li>
-                    <li name='atracciones' onClick={handleClick}>Atracciones Turísticas</li>
-                    <li name='aeropuertos' onClick={handleClick}>Aeropuertos</li>
+                <ul className='items'>
+                    <li name='presidentes' onClick={handleClick} className={selectedTab === 'presidentes' ? 'active' : ''} >Presidentes</li>
+                    <li name='atracciones' onClick={handleClick} className={selectedTab === 'atracciones' ? 'active' : ''} >Atracciones Turísticas</li>
+                    <li name='aeropuertos' onClick={handleClick} className={selectedTab === 'aeropuertos' ? 'active' : ''} >Aeropuertos</li>
                 </ul>
             </nav>
             
