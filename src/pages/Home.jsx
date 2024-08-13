@@ -14,7 +14,9 @@ const Home = ( ) => {
     const [departamentos, setDepartamentos] = useState([])
     const [regiones, setRegiones] = useState([])
     const [selectedTab, setSelectedTab] = useState('presidentes')
-    const [responseTime, setResponseTime] = useState({})
+    const [responsePresidentes, setResponsePresidentes] = useState(0)
+    const [responseAeropuertos, setResponseAeropuertos] = useState(0)
+    const [responseAtracciones, setResponseAtracciones] = useState(0)
 
 
     useEffect( () => {
@@ -23,21 +25,19 @@ const Home = ( ) => {
                 const start = Date.now()
                 const rawData = await fetch(`${API}${endpoint}`)
                 const time = Date.now() - start
-                console.log(responseTime)
-                setResponseTime({
-                    ...responseTime,
-                    [endpoint]: time
-                })
                 const data = await rawData.json()
                 switch(endpoint){
                     case 'President':
                         setPresidentes(data)
+                        setResponsePresidentes(time)
                         break
                     case 'TouristicAttraction':
                         setAtracciones(data)
+                        setResponseAtracciones(time)
                         break
                     case 'Airport':
                         setAeropuertos(data)
+                        setResponseAeropuertos(time)
                         break
                     case 'Department':
                         setDepartamentos(data)
@@ -71,13 +71,13 @@ const Home = ( ) => {
             </header>
             <Tab selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
             { selectedTab === 'presidentes' &&
-                <PresidentView data={presidentes} groupedData={partidosGrouped} time={responseTime.President} />
+                <PresidentView data={presidentes} groupedData={partidosGrouped} time={responsePresidentes} />
             }
             { selectedTab === 'atracciones' &&
-                <AtractionView data={atracciones} groupedData={atraccionesGrouped} time={responseTime.TouristicAttraction} />
+                <AtractionView data={atracciones} groupedData={atraccionesGrouped} time={responseAtracciones} />
             }
             { selectedTab === 'aeropuertos' &&
-                <AirportView data={aeropuertos} groupedData={aeropuertosGrouped} specialGroupedData={aeropuertosGroupedByRegion} time={responseTime.Airport} />
+                <AirportView data={aeropuertos} groupedData={aeropuertosGrouped} specialGroupedData={aeropuertosGroupedByRegion} time={responseAeropuertos} />
             }
         </>
     )

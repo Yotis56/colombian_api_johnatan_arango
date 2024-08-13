@@ -1,6 +1,7 @@
 import { Collapsible } from "./Colapsible"
 
 const AirportView = ({data, groupedData, specialGroupedData, time}) => {
+    console.log(specialGroupedData)
     return (
         <div className="viewer-container">
             <div className="viewer_count">

@@ -93,7 +93,7 @@ const groupAirportsPerRegion = (aeropuertos, regiones) => {
         "Region": {}
     }
     aeropuertos.forEach( aeropuerto => {
-        const airportRegion = regiones.find( item => item.id === aeropuerto.department.regionId)
+        const airportRegion = regiones?.find( item => item.id === aeropuerto.department.regionId)
         if (!groupedData.Region[airportRegion.name]) {
             groupedData.Region = {
                 ...groupedData.Region,
