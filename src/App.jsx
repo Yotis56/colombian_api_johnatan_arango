@@ -10,7 +10,7 @@ const App = createBrowserRouter(
       <Route path='/' element={ <Entry />} />
       <Route path='/colombia_dash' element={ <Home />} />
     </Route>
-  )
+  ), { basename: "/colombian_api_johnatan_arango" }
 )
 
 export default App
