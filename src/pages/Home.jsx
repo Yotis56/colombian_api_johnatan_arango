@@ -77,7 +77,7 @@ const Home = ( ) => {
                 <AtractionView data={atracciones} groupedData={atraccionesGrouped} time={responseTime.TouristicAttraction} />
             }
             { selectedTab === 'aeropuertos' &&
-                <AirportView data={aeropuertos} groupedData={aeropuertosGrouped} time={responseTime.Airport} />
+                <AirportView data={aeropuertos} groupedData={aeropuertosGrouped} specialGroupedData={aeropuertosGroupedByRegion} time={responseTime.Airport} />
             }
         </>
     )

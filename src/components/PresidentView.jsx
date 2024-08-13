@@ -27,7 +27,7 @@ const PresidentView = ({data, groupedData, time}) => {
                         }
                     </div>
                 </Collapsible>
-                <Collapsible label='Entidad Agrupada'>
+                <Collapsible label='Entidad Agrupada por Partido Político'>
                     <div className="">
                         {
                             groupedData.map( partido => (

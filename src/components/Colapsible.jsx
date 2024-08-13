@@ -6,7 +6,6 @@ const Collapsible = ({children, label }) => {
     const contentRef = useRef()
     const handleClick = () => {
         setOpen(!open)
-        if (open) console.log(contentRef.current.scrollHeight)
     }
 
     return (

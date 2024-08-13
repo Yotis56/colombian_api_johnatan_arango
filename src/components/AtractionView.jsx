@@ -8,11 +8,47 @@ const AtractionView = ({data, groupedData, time}) => {
             </div>
             <div className="viewer_list">
                 <Collapsible label='Entidad Completa'>
-                    <ul>    
-                    </ul>
+                <div>
+                        {
+                        data.map( atraction => (
+                            <div key={atraction.id} className="item-container">
+                                <div className="image-container">
+                                    <img src={atraction.images[0]} alt={`${atraction.name}`} loading="lazy" />
+                                </div>
+                                <div className="info-container">
+                                    <p className="name"><span>Nombre: </span>{`${atraction.name}`}</p>
+                                    <p className="since"><span>Ubicación: </span>{`${atraction.city.name}`}</p>
+                                    <p className="description">{atraction.description}</p>
+                                </div>
+                            </div>
+                        ))
+                        }
+                    </div>
                 </Collapsible>
-                <Collapsible label='Entidad Agrupada'>
-                    <p>Content still to be filled</p>
+                <Collapsible label='Entidad Agrupada por Departamento y Ciudad'>
+                    <div className="small-container">
+                        {
+                            groupedData.map( atraction => (
+                                <div className="item-container small" key={atraction.id}>
+                                    <div className="partido-container">
+                                        <div className="partido-info">
+                                            <p><span>Departamento: </span>{atraction.departamento}</p>
+                                            <p><span>Atracciones: </span>{atraction.count}</p>
+                                        </div>
+                                        <ul>
+                                            {
+                                            atraction.cities.map( city => (
+                                                <li key={city.id} className="grouped-airport__city">
+                                                    <p><span>{city.city}</span>{`: ${city.count}`}</p>
+                                                </li>
+                                            ))
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            ))
+                        }
+                    </div>
                 </Collapsible>
             </div>
         </div>
